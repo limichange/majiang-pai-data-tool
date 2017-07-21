@@ -119,7 +119,11 @@ export default {
   },
   watch: {
     pais () {
-      this.textarea = JSON.stringify(this.users)
+      const self = this
+      self.textarea = JSON.stringify({
+        holds: self.users,
+        pais: self.pais
+      })
     }
   },
   methods: {
