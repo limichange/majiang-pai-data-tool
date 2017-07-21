@@ -122,7 +122,7 @@ export default {
       const self = this
       let data = []
 
-      for (let i = 0; i < 14; i++) {
+      for (let i = 0; i < 13; i++) {
         for (let j = 0; j < 4; j++) {
           data.push(self.users[j][i])
         }
