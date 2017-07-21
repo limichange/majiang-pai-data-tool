@@ -1,10 +1,48 @@
 <template>
   <div class="indexPage">
     <h3>牌场</h3>
+    <span>筒</span>
     <el-button
+      v-if="getMJType(pai) === 0"
       @click="select(pai)"
       v-for="pai in pais"
-      type="primary"
+      size="mini">
+      {{ getType(pai) }}
+    </el-button>
+    <br>
+    <span>条</span>
+    <el-button
+      v-if="getMJType(pai) === 1"
+      @click="select(pai)"
+      v-for="pai in pais"
+      size="mini">
+      {{ getType(pai) }}
+    </el-button>
+    <br>
+    <span>万</span>
+    <el-button
+      v-if="getMJType(pai) === 2"
+      @click="select(pai)"
+      v-for="pai in pais"
+      size="mini">
+      {{ getType(pai) }}
+    </el-button>
+    <br>
+    <span>风牌</span>
+    <el-button
+      @click="select(pai)"
+      v-if="pai <= 33 && pai > 29"
+      v-for="pai in pais"
+      size="mini">
+      {{ getType(pai) }}
+    </el-button>
+    <br>
+
+    <span>花牌</span>
+    <el-button
+      @click="select(pai)"
+      v-if="pai > 33 || pai === 27 || pai === 28 || pai === 29"
+      v-for="pai in pais"
       size="mini">
       {{ getType(pai) }}
     </el-button>
@@ -14,6 +52,7 @@
     <el-button
       v-for="pai in users[0]"
       type="primary"
+      @click="remove(0, pai)"
       size="mini">
       {{ getType(pai) }}
     </el-button>
@@ -85,8 +124,22 @@ export default {
   },
   methods: {
     getType: paiUtils.getType,
+    getMJType: paiUtils.getMJType,
+    remove (user, pai) {
+      const self = this
+      self.pais.push(pai)
+      self.users[user].splice(self.users[user].indexOf(pai), 1)
+    },
     copy () {
-      clipboard.copy(this.textarea)
+      const self = this
+      clipboard
+        .copy(self.textarea)
+        .then(() => {
+          self.$message({
+            message: '复制成功',
+            type: 'success'
+          })
+        })
     },
     select (pai) {
       if (this.users[this.radio].length === 13) {
@@ -101,4 +154,7 @@ export default {
 </script>
 
 <style scoped>
+.el-button {
+  margin-bottom: 3px;
+}
 </style>

@@ -79,7 +79,27 @@ function getType (id) {
   return typeList[id]
 }
 
+/**
+ * 根据id号码获取牌的类型
+ *
+ * @param {any} id
+ * @returns
+ */
+function getMJType (id) {
+  if (id >= 0 && id < 9) {
+    // 筒
+    return 0
+  } else if (id >= 9 && id < 18) {
+    // 条
+    return 1
+  } else if (id >= 18 && id < 27) {
+    // 万
+    return 2
+  }
+}
+
 export default {
+  getMJType,
   shuffle,
   getType
 }
