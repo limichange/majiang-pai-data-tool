@@ -118,12 +118,19 @@ export default {
     }
   },
   watch: {
-    pais () {
+    users () {
       const self = this
-      self.textarea = JSON.stringify({
-        holds: self.users,
-        pais: self.pais
-      })
+      let data = []
+
+      for (let i = 0; i < 14; i++) {
+        for (let j = 0; j < 4; j++) {
+          if (self.users[j][i]) {
+            data.push(self.users[j][i])
+          }
+        }
+      }
+
+      self.textarea = JSON.stringify(data.concat(self.pais))
     }
   },
   methods: {
