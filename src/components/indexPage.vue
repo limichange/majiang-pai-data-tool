@@ -104,6 +104,8 @@
 import paiUtils from './paiUtils'
 import clipboard from 'clipboard-js'
 
+const MAX_NUM = 18
+
 export default {
   name: 'indexPage',
   mounted () {
@@ -122,7 +124,7 @@ export default {
       const self = this
       let data = []
 
-      for (let i = 0; i < 13; i++) {
+      for (let i = 0; i < MAX_NUM; i++) {
         for (let j = 0; j < 4; j++) {
           data.push(self.users[j][i])
         }
@@ -151,7 +153,7 @@ export default {
         })
     },
     select (pai) {
-      if (this.users[this.radio].length === 13) {
+      if (this.users[this.radio].length === MAX_NUM) {
         return
       }
 
